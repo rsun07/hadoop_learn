@@ -10,30 +10,24 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 public class BasicFileOpDemo extends HdfsDemoBase {
     @Test
     public void upload() throws IOException {
-        fs.copyFromLocalFile(new Path("./src/test/resources/upload_demo"), new Path("/demo/upload_demo"));
+        fs.copyFromLocalFile(new Path(LOCAL_UPLOAD_FILE_PATH), new Path(HDFS_UPLOAD_FILE_PATH));
     }
 
     @Test
     public void download() throws IOException {
-        String targetFilePath = "./src/test/resources/download_demo";
-
-        File file = new File(targetFilePath);
+        File file = new File(LOCAL_DOWNLOAD_FILE_PATH);
         file.deleteOnExit();
 
-        fs.copyToLocalFile(new Path("/demo/download_demo"), new Path(targetFilePath));
+        fs.copyToLocalFile(new Path(HDFS_DOWNLOAD_FILE_PATH), new Path(LOCAL_DOWNLOAD_FILE_PATH));
     }
 
     @Test
     public void iterateDir() throws IOException {
-        RemoteIterator<LocatedFileStatus> listFiles = fs.listFiles(new Path("/demo"), true);
+        RemoteIterator<LocatedFileStatus> listFiles = fs.listFiles(new Path(HDFS_DEMO_ROOT), true);
 
         while(listFiles.hasNext()) {
             LocatedFileStatus status = listFiles.next();
@@ -50,7 +44,7 @@ public class BasicFileOpDemo extends HdfsDemoBase {
 
     @Test
     public void listDir() throws IOException {
-        listDir("/demo", "--");
+        listDir(HDFS_DEMO_ROOT, "--");
     }
 
     private void listDir(String dirPath, String indent) throws IOException {

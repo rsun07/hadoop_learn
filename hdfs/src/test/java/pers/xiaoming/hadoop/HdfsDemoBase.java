@@ -11,9 +11,18 @@ import java.io.IOException;
 public class HdfsDemoBase {
     private static final String DEMO_DEFAULT_FS = "hdfs://localhost:9000";
 
-    protected static final Logger logger = Logger.getLogger(HdfsDemoBase.class);
+    static final Logger logger = Logger.getLogger(HdfsDemoBase.class);
 
-    protected static FileSystem fs;
+
+
+    static final String LOCAL_UPLOAD_FILE_PATH = "./src/test/resources/upload_demo";
+    static final String LOCAL_DOWNLOAD_FILE_PATH = "./src/test/resources/download_demo";
+
+    static final String HDFS_DEMO_ROOT = "/demo";
+    static final String HDFS_UPLOAD_FILE_PATH = "/demo/upload_demo";
+    static final String HDFS_DOWNLOAD_FILE_PATH = "/demo/download_demo";
+
+    static FileSystem fs;
 
 
     @BeforeClass
