@@ -8,4 +8,9 @@
   </parent>
 
   <artifactId>hdfs</artifactId>
+
+  <dependencies>
+
+  </dependencies>
+
 </project>
