@@ -13,8 +13,6 @@ public class HdfsDemoBase {
 
     static final Logger logger = Logger.getLogger(HdfsDemoBase.class);
 
-
-
     static final String LOCAL_UPLOAD_FILE_PATH = "./src/test/resources/upload_demo";
     static final String LOCAL_DOWNLOAD_FILE_PATH = "./src/test/resources/download_demo";
 
@@ -23,7 +21,6 @@ public class HdfsDemoBase {
     static final String HDFS_DOWNLOAD_FILE_PATH = "/demo/download_demo";
 
     static FileSystem fs;
-
 
     @BeforeClass
     public static void setup() throws IOException {
