@@ -7,13 +7,10 @@ import org.apache.log4j.Logger;
 
 import java.io.IOException;
 
-public class LeaderLatchServer implements LeaderLatchListener {
+public class LeaderLatchServer implements LeaderServer, LeaderLatchListener {
     private static final Logger logger = Logger.getLogger(LeaderLatchServer.class);
 
     private final String name;
-
-    // Zookeeper framework-style client
-    private CuratorFramework client;
 
     // Abstraction to select a "leader" amongst multiple contenders
     // in a group of JMVs connected to a Zookeeper cluster.
@@ -21,7 +18,6 @@ public class LeaderLatchServer implements LeaderLatchListener {
 
     public LeaderLatchServer(String name, String latchPath, CuratorFramework client) throws Exception {
         this.name = name;
-        this.client = client;
         this.leaderLatch = new LeaderLatch(client, latchPath);
         leaderLatch.addListener(this);
         leaderLatch.start();

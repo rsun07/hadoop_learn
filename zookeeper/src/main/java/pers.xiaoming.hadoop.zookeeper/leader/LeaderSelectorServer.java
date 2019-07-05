@@ -5,11 +5,9 @@ import org.apache.curator.framework.recipes.leader.LeaderSelector;
 import org.apache.curator.framework.recipes.leader.LeaderSelectorListenerAdapter;
 import org.apache.log4j.Logger;
 
-import java.io.Closeable;
-import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class LeaderSelectorServer extends LeaderSelectorListenerAdapter implements Closeable {
+public class LeaderSelectorServer extends LeaderSelectorListenerAdapter implements LeaderServer {
     private static final Logger logger = Logger.getLogger(LeaderSelectorServer.class);
 
     private final String name;
@@ -27,19 +25,11 @@ public class LeaderSelectorServer extends LeaderSelectorListenerAdapter implemen
         this.leaderCount = new AtomicInteger();
         leaderSelector = new LeaderSelector(client, path, this);
         leaderSelector.autoRequeue();
-    }
-
-    private void stopLead() {
-        this.shouldLead = false;
-    }
-
-    public void start() throws IOException {
         leaderSelector.start();
     }
 
-    @Override
-    public void close() throws IOException {
-        leaderSelector.close();
+    public void stopLead() {
+        this.shouldLead = false;
     }
 
     @Override
@@ -51,5 +41,17 @@ public class LeaderSelectorServer extends LeaderSelectorListenerAdapter implemen
             Thread.sleep(1000);
         }
         logger.info(String.format("Server %s is no longer the leader", name));
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean hasLeadership() {
+        return leaderSelector.hasLeadership();
+    }
+
+    public void stop() {
+        leaderSelector.close();
     }
 }
