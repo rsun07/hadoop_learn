@@ -1,43 +1,13 @@
 package pers.xiaoming.hadoop.zookeeper;
 
-import org.apache.log4j.Logger;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
-import org.apache.zookeeper.WatchedEvent;
-import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooDefs;
-import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.data.Stat;
-import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.io.IOException;
-
-public class BasicZookeeperOpDemo {
-    private static final String CONNECT_STRING = "localhost:2181";
-    private static final int SESSION_TIMEOUT = 2000;
-
-    private static final Logger logger = Logger.getLogger(BasicZookeeperOpDemo.class);
-
-    protected static ZooKeeper zooKeeper;
-
-    @BeforeClass
-    public static void init() throws IOException {
-        zooKeeper = new ZooKeeper(CONNECT_STRING, SESSION_TIMEOUT, new Watcher() {
-            @Override
-            public void process(WatchedEvent event) {
-            }
-        });
-    }
-
-    @AfterClass
-    public static void close() throws InterruptedException {
-        if (zooKeeper != null) {
-            zooKeeper.close();
-        }
-    }
+public class BasicZookeeperOpDemo extends ZookeeperTestBase {
 
     @Test(expected = KeeperException.class)
     public void curd() throws KeeperException, InterruptedException {
