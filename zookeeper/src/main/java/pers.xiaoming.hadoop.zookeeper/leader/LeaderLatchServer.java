@@ -7,16 +7,19 @@ import org.apache.log4j.Logger;
 
 import java.io.IOException;
 
-public class LeaderLatchClient implements LeaderLatchListener {
-    private static final Logger logger = Logger.getLogger(LeaderLatchClient.class);
+public class LeaderLatchServer implements LeaderLatchListener {
+    private static final Logger logger = Logger.getLogger(LeaderLatchServer.class);
 
     private final String name;
 
-    private LeaderLatch leaderLatch;
-
+    // Zookeeper framework-style client
     private CuratorFramework client;
 
-    public LeaderLatchClient(String name, String latchPath, CuratorFramework client) throws Exception {
+    // Abstraction to select a "leader" amongst multiple contenders
+    // in a group of JMVs connected to a Zookeeper cluster.
+    private LeaderLatch leaderLatch;
+
+    public LeaderLatchServer(String name, String latchPath, CuratorFramework client) throws Exception {
         this.name = name;
         this.client = client;
         this.leaderLatch = new LeaderLatch(client, latchPath);
@@ -36,10 +39,6 @@ public class LeaderLatchClient implements LeaderLatchListener {
 
     public String getName() {
         return name;
-    }
-
-    public CuratorFramework getClient() {
-        return client;
     }
 
     public void stop() throws IOException {
