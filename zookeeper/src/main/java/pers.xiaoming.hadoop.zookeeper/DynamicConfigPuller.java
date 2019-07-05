@@ -9,7 +9,7 @@ import org.apache.zookeeper.ZooKeeper;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class DynamicConfigPuller {
+public class DynamicConfigPuller implements AutoCloseable {
     private static final Logger logger = Logger.getLogger(DynamicConfigPuller.class);
     private final ZooKeeper zooKeeper;
     private Map<String, String> configs;
@@ -31,7 +31,8 @@ public class DynamicConfigPuller {
     private void initalConfigs(String[] keys) throws KeeperException, InterruptedException {
         this.configs = new ConcurrentHashMap<>();
         for (String key : keys) {
-            zooKeeper.getData(key, configUpdateWatcher, null);
+            byte[] data = zooKeeper.getData(key, configUpdateWatcher, null);
+            configs.put(key, new String(data));
         }
     }
 
@@ -46,5 +47,16 @@ public class DynamicConfigPuller {
             throw new RuntimeException(e.getMessage());
         }
         configs.put(key, value);
+    }
+
+    public String get(String key) {
+        return configs.get(key);
+    }
+
+    @Override
+    public void close() throws Exception {
+        if (zooKeeper != null) {
+            zooKeeper.close();
+        }
     }
 }

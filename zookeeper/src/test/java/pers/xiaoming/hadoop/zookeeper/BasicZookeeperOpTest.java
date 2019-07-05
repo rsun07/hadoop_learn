@@ -7,7 +7,7 @@ import org.apache.zookeeper.data.Stat;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class BasicZookeeperOpDemo extends ZookeeperTestBase {
+public class BasicZookeeperOpTest extends ZookeeperTestBase {
 
     @Test(expected = KeeperException.class)
     public void curd() throws KeeperException, InterruptedException {
@@ -16,13 +16,16 @@ public class BasicZookeeperOpDemo extends ZookeeperTestBase {
         int version = 0;
 
         // clean up
-        zooKeeper.delete(key, version);
+        Stat stat = zooKeeper.exists(key, false);
+        if (stat != null) {
+            zooKeeper.delete(key, stat.getVersion());
+        }
 
         // create
         zooKeeper.create(key, value.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
 
         // exist check
-        Stat stat = zooKeeper.exists(key, false);
+        stat = zooKeeper.exists(key, false);
         Assert.assertNotNull(stat);
         logger.info(stat.toString());
 

@@ -13,7 +13,7 @@ public class ZookeeperTestBase {
     private static final String CONNECT_STRING = "localhost:2181";
     private static final int SESSION_TIMEOUT = 2000;
 
-    static final Logger logger = Logger.getLogger(BasicZookeeperOpDemo.class);
+    static final Logger logger = Logger.getLogger(BasicZookeeperOpTest.class);
 
     static ZooKeeper zooKeeper;
 
