@@ -1,4 +1,4 @@
-package pers.xiaoming.hadoop.zookeeper;
+package pers.xiaoming.hadoop.zookeeper.config;
 
 import org.apache.log4j.Logger;
 import org.apache.zookeeper.KeeperException;

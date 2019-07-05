@@ -1,4 +1,4 @@
-package pers.xiaoming.hadoop.zookeeper;
+package pers.xiaoming.hadoop.zookeeper.config;
 
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
@@ -7,6 +7,7 @@ import org.apache.zookeeper.data.Stat;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import pers.xiaoming.hadoop.zookeeper.ZookeeperTestBase;
 
 public class DynamicConfigPullerTest extends ZookeeperTestBase {
     private static final String TEST_PATH_PREFIX = "/config_puller_test1";
