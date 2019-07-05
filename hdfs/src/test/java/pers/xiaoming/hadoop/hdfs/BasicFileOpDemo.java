@@ -1,4 +1,4 @@
-package pers.xiaoming.hadoop;
+package pers.xiaoming.hadoop.hdfs;
 
 import com.google.common.collect.Lists;
 import org.apache.hadoop.fs.BlockLocation;

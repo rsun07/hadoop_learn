@@ -1,4 +1,4 @@
-package pers.xiaoming.hadoop;
+package pers.xiaoming.hadoop.hdfs;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
