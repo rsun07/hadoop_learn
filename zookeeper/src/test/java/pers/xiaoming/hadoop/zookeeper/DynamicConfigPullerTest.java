@@ -9,21 +9,16 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class DynamicConfigPullerTest extends ZookeeperTestBase {
+    private static final String TEST_PATH_PREFIX = "/config_puller_test1";
     private static DynamicConfigPuller configPuller;
-    private static String[] testPaths = new String[]{"/k1", "/k2", "/k3"};
+    private static String[] testPaths = new String[]{TEST_PATH_PREFIX + "_k1", TEST_PATH_PREFIX + "_k2", TEST_PATH_PREFIX + "_k3"};
     private static String[] testInitValues = new String[]{"v1", "v2", "v3"};
     private static String[] testUpdatedValues = new String[]{"v1_u", "v2_u", "v3_u"};
 
     @BeforeClass
     public static void configPullerSetup() throws KeeperException, InterruptedException {
         for (int i = 0; i < testPaths.length; i++) {
-            String path = testPaths[i];
-            Stat stat = zooKeeper.exists(path, false);
-            if (stat != null) {
-                zooKeeper.delete(path, stat.getVersion());
-            }
-
-            zooKeeper.create(path, testInitValues[i].getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+            zooKeeper.create(testPaths[i], testInitValues[i].getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
         }
 
         configPuller = new DynamicConfigPuller(zooKeeper, testPaths);
