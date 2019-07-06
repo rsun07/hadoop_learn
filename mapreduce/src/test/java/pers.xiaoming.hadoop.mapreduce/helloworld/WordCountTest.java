@@ -1,25 +1,21 @@
 package pers.xiaoming.hadoop.mapreduce.helloworld;
 
-import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import pers.xiaoming.hadoop.mapreduce.TestBase;
 
-import java.io.File;
 import java.io.IOException;
 
-public class WordCountText {
-    private static final String RESOURCES_PATH = "./src/test/resources";
+public class WordCountTest extends TestBase {
+    private static final String RESOURCES_PATH = ROOT_RESOURCE_PATH + "/word_count";
     private static final String INPUT_PATH = RESOURCES_PATH + "/wc_input";
     private static final String OUTPUT_PATH = RESOURCES_PATH + "/wc_output";
 
 
     @BeforeClass
     public static void cleanup() throws IOException {
-        File file = new File(OUTPUT_PATH);
-        if (file.isDirectory()) {
-            FileUtils.deleteDirectory(file);
-        }
+        cleanupOutputDir(OUTPUT_PATH);
     }
 
     @Test
