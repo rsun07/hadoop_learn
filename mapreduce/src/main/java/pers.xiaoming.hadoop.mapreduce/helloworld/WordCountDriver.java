@@ -43,11 +43,8 @@ public class WordCountDriver {
         return job;
     }
 
-    public void run() throws InterruptedException, IOException, ClassNotFoundException {
-
-        boolean result = job.waitForCompletion(true);
-
-        System.exit(result ? 0 : 1);
+    public boolean run() throws InterruptedException, IOException, ClassNotFoundException {
+        return job.waitForCompletion(true);
     }
 
 }

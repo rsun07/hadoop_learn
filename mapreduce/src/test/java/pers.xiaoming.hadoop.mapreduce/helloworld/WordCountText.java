@@ -1,6 +1,7 @@
 package pers.xiaoming.hadoop.mapreduce.helloworld;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -24,6 +25,6 @@ public class WordCountText {
     @Test
     public void test() throws IOException, ClassNotFoundException, InterruptedException {
         WordCountDriver driver = new WordCountDriver(INPUT_PATH, OUTPUT_PATH);
-        driver.run();
+        Assert.assertTrue(driver.run());
     }
 }
