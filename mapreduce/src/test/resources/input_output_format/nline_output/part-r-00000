@@ -1,0 +1,4 @@
+Log ERROR 400	2
+Log ERROR 500	1
+Log Info 200	4
+Log Info 204	2

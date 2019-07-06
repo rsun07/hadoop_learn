@@ -7,11 +7,12 @@ import org.apache.hadoop.mapreduce.Reducer;
 import java.io.IOException;
 
 public class NLineTextReducer extends Reducer<Text, LongWritable, Text, LongWritable> {
-    long sum = 0;
+    long sum;
     LongWritable v = new LongWritable();
 
     @Override
     protected void reduce(Text key, Iterable<LongWritable> values, Context context) throws IOException, InterruptedException {
+        sum = 0;
         for (LongWritable value : values) {
             sum += value.get();
         }

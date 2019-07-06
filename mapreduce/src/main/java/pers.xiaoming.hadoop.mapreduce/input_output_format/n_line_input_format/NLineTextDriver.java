@@ -42,6 +42,7 @@ public class NLineTextDriver {
         job.setOutputValueClass(LongWritable.class);
 
         // set input format class
+        // number of splits:3
         NLineInputFormat.setNumLinesPerSplit(job, 3);
         job.setInputFormatClass(NLineInputFormat.class);
 
