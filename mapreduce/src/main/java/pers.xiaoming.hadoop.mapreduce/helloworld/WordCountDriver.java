@@ -29,6 +29,11 @@ public class WordCountDriver {
         job.setJarByClass(WordCountDriver.class);
 
         job.setMapperClass(WordCountMapper.class);
+
+        // Combiner extends Reducer
+        // Combiner runs in each Mapper's local machine
+        // Reducer collect data globally
+        job.setCombinerClass(WordCountReducer.class);
         job.setReducerClass(WordCountReducer.class);
 
         job.setMapOutputKeyClass(Text.class);
