@@ -12,6 +12,7 @@
     <modules>
         <module>hdfs</module>
         <module>zookeeper</module>
+        <module>mapreduce</module>
     </modules>
 
     <properties>
