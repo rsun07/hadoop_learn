@@ -1,5 +1,6 @@
 package pers.xiaoming.hadoop.mapreduce.writable;
 
+import org.apache.commons.math3.util.Precision;
 import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
@@ -27,7 +28,7 @@ public class PaymentCountReducer extends Reducer<Text, PaymentUnit, Text, Paymen
             sumPayment += numOfUnit * unitPrice;
         }
 
-        v.setTotalPayment(sumPayment);
+        v.setTotalPayment(Precision.round(sumPayment, 2));
 
         context.write(key, v);
     }
