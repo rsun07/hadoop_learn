@@ -7,19 +7,20 @@ import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 import pers.xiaoming.hadoop.mapreduce.payment.models.PaymentResult;
+import pers.xiaoming.hadoop.mapreduce.payment.models.PaymentResultComparable;
 import pers.xiaoming.hadoop.mapreduce.payment.models.PaymentUnit;
 
 import java.io.IOException;
 
-public class PaymentCountReducer extends Reducer<Text, PaymentUnit, PaymentResult, NullWritable> {
+public class PaymentComparableCountReducer extends Reducer<Text, PaymentUnit, PaymentResultComparable, NullWritable> {
 
-    PaymentResult k;
+    PaymentResultComparable k;
     NullWritable nullWritable = NullWritable.get();
 
     @Override
     protected void reduce(Text key, Iterable<PaymentUnit> values, Context context) throws IOException, InterruptedException {
         double sumPayment = 0.0;
-        k = new PaymentResult();
+        k = new PaymentResultComparable();
 
         // get worker name and the workshopId it belongs to
         String[] fields = key.toString().split(",");
