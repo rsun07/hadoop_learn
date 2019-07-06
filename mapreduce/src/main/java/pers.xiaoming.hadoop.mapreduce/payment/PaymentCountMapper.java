@@ -1,15 +1,16 @@
-package pers.xiaoming.hadoop.mapreduce.writable;
+package pers.xiaoming.hadoop.mapreduce.payment;
 
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
+import pers.xiaoming.hadoop.mapreduce.payment.models.PaymentUnit;
 
 import java.io.IOException;
 
 public class PaymentCountMapper extends Mapper<LongWritable, Text, Text, PaymentUnit> {
 
     Text k = new Text();
-    PaymentUnit.PaymentUnitBuilder vBuilder = new PaymentUnit.PaymentUnitBuilder();
+    PaymentUnit.PaymentUnitBuilder vBuilder = PaymentUnit.builder();
 
     @Override
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {

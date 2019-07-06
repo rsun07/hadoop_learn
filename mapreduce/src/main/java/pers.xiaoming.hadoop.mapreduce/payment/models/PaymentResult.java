@@ -1,4 +1,4 @@
-package pers.xiaoming.hadoop.mapreduce.writable;
+package pers.xiaoming.hadoop.mapreduce.payment.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

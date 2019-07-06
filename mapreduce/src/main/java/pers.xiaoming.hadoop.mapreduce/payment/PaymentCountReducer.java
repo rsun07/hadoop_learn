@@ -1,10 +1,12 @@
-package pers.xiaoming.hadoop.mapreduce.writable;
+package pers.xiaoming.hadoop.mapreduce.payment;
 
 import org.apache.commons.math3.util.Precision;
 import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
+import pers.xiaoming.hadoop.mapreduce.payment.models.PaymentResult;
+import pers.xiaoming.hadoop.mapreduce.payment.models.PaymentUnit;
 
 import java.io.IOException;
 

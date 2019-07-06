@@ -1,0 +1,2 @@
+Worker1	PaymentResult{workerName='Worker1', completedUnits={1=2.0, 2=1.0}, totalPayment=20.0}
+Worker2	PaymentResult{workerName='Worker2', completedUnits={1=2.0, 2=1.0}, totalPayment=40.0}

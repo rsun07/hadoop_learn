@@ -1,4 +1,4 @@
-package pers.xiaoming.hadoop.mapreduce.writable;
+package pers.xiaoming.hadoop.mapreduce.payment;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -7,7 +7,7 @@ import pers.xiaoming.hadoop.mapreduce.TestBase;
 
 import java.io.IOException;
 
-public class PaymentTest extends TestBase {
+public class WritableTest extends TestBase {
     private static final String RESOURCES_PATH = ROOT_RESOURCE_PATH + "/payment";
     private static final String SHORT_INPUT_PATH = RESOURCES_PATH + "/payment_input_short_test";
     private static final String SHORT_OUTPUT_PATH = RESOURCES_PATH + "/payment_output_short_test";
