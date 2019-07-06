@@ -1,21 +1,20 @@
-package pers.xiaoming.hadoop.mapreduce.helloworld;
+package pers.xiaoming.hadoop.mapreduce.writable;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
-import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import java.io.IOException;
 
-public class WordCountDriver {
+public class PaymentCountDriver {
     private final String inputPath;
     private final String outputPath;
     private final Job job;
 
-    public WordCountDriver(String inputPath, String outputPath) throws IOException {
+    public PaymentCountDriver(String inputPath, String outputPath) throws IOException {
         this.inputPath = inputPath;
         this.outputPath = outputPath;
 
@@ -26,16 +25,16 @@ public class WordCountDriver {
         Configuration configuration = new Configuration();
         Job job = Job.getInstance(configuration);
 
-        job.setJarByClass(WordCountDriver.class);
+        job.setJarByClass(PaymentCountDriver.class);
 
-        job.setMapperClass(WordCountMapper.class);
-        job.setReducerClass(WordCountReducer.class);
+        job.setMapperClass(PaymentCountMapper.class);
+        job.setReducerClass(PaymentCountReducer.class);
 
-        job.setMapOutputKeyClass(Text.class);
-        job.setMapOutputValueClass(IntWritable.class);
+        job.setMapOutputKeyClass(IntWritable.class);
+        job.setMapOutputValueClass(PaymentUnit.class);
 
-        job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(IntWritable.class);
+        job.setOutputKeyClass(IntWritable.class);
+        job.setOutputValueClass(PaymentResult.class);
 
         FileInputFormat.setInputPaths(job, new Path(inputPath));
         FileOutputFormat.setOutputPath(job, new Path(outputPath));
@@ -46,4 +45,5 @@ public class WordCountDriver {
     public boolean run() throws InterruptedException, IOException, ClassNotFoundException {
         return job.waitForCompletion(true);
     }
+
 }
