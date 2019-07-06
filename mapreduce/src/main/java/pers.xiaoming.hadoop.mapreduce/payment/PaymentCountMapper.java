@@ -20,15 +20,17 @@ public class PaymentCountMapper extends Mapper<LongWritable, Text, Text, Payment
 
         String workName = fields[0];
 
-        int unitId = Integer.parseInt(fields[1]);
+        int workshopId = Integer.parseInt(fields[1]);
 
-        double unitPrice = Double.parseDouble(fields[2]);
+        int unitId = Integer.parseInt(fields[2]);
 
-        int numOfUnit = Integer.parseInt(fields[3]);
+        double unitPrice = Double.parseDouble(fields[3]);
 
-        k.set(workName);
-        vBuilder.workerName(workName)
-                .unitId(unitId)
+        int numOfUnit = Integer.parseInt(fields[4]);
+
+        k.set(workName + "," + workshopId);
+
+        vBuilder.unitId(unitId)
                 .unitPrice(unitPrice)
                 .numOfUnitCompleted(numOfUnit);
 

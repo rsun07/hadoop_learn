@@ -15,6 +15,7 @@ import java.io.IOException;
 @AllArgsConstructor
 public class PaymentResult implements Writable {
     private String workerName;
+    private int workshopId;
     private MapWritable completedUnits;
     private double totalPayment;
 
@@ -25,6 +26,7 @@ public class PaymentResult implements Writable {
     @Override
     public void write(DataOutput dataOutput) throws IOException {
         dataOutput.writeUTF(workerName);
+        dataOutput.writeInt(workshopId);
         completedUnits.write(dataOutput);
         dataOutput.writeDouble(totalPayment);
     }
@@ -32,16 +34,8 @@ public class PaymentResult implements Writable {
     @Override
     public void readFields(DataInput dataInput) throws IOException {
         workerName = dataInput.readUTF();
+        workshopId = dataInput.readInt();
         completedUnits.readFields(dataInput);
         totalPayment = dataInput.readDouble();
-    }
-
-    @Override
-    public String toString() {
-        return "PaymentResult{" +
-                "workerName='" + workerName + '\'' +
-                ", completedUnits=" + completedUnits +
-                ", totalPayment=" + totalPayment +
-                '}';
     }
 }

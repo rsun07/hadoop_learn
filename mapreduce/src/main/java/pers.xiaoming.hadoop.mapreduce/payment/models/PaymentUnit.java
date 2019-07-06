@@ -19,14 +19,12 @@ import java.io.IOException;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PaymentUnit implements Writable {
-    private String workerName;
     private int unitId;
     private double unitPrice;
     private int numOfUnitCompleted;
 
     @Override
     public void write(DataOutput dataOutput) throws IOException {
-        dataOutput.writeUTF(workerName);
         dataOutput.writeInt(unitId);
         dataOutput.writeDouble(unitPrice);
         dataOutput.writeInt(numOfUnitCompleted);
@@ -34,19 +32,8 @@ public class PaymentUnit implements Writable {
 
     @Override
     public void readFields(DataInput dataInput) throws IOException {
-        this.workerName = dataInput.readUTF();
         this.unitId = dataInput.readInt();
         this.unitPrice = dataInput.readDouble();
         this.numOfUnitCompleted = dataInput.readInt();
-    }
-
-    @Override
-    public String toString() {
-        return "PaymentUnit{" +
-                "workerName='" + workerName + '\'' +
-                ", unitId=" + unitId +
-                ", unitPrice=" + unitPrice +
-                ", numOfUnitCompleted=" + numOfUnitCompleted +
-                '}';
     }
 }
