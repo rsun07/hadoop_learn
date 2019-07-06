@@ -1,6 +1,7 @@
 package pers.xiaoming.hadoop.mapreduce.writable;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.hadoop.io.Writable;
@@ -14,26 +15,27 @@ import java.io.IOException;
  * and the price per unit
  */
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class PaymentUnit implements Writable {
-    private int workerId;
-    private String unitName;
+    private String workerName;
+    private int unitId;
     private double unitPrice;
     private int numOfUnitCompleted;
 
     @Override
     public void write(DataOutput dataOutput) throws IOException {
-        dataOutput.writeInt(workerId);
-        dataOutput.writeUTF(unitName);
+        dataOutput.writeUTF(workerName);
+        dataOutput.writeInt(unitId);
         dataOutput.writeDouble(unitPrice);
         dataOutput.writeInt(numOfUnitCompleted);
     }
 
     @Override
     public void readFields(DataInput dataInput) throws IOException {
-        this.workerId = dataInput.readInt();
-        this.unitName = dataInput.readUTF();
+        this.workerName = dataInput.readUTF();
+        this.unitId = dataInput.readInt();
         this.unitPrice = dataInput.readDouble();
         this.numOfUnitCompleted = dataInput.readInt();
     }
@@ -41,8 +43,8 @@ public class PaymentUnit implements Writable {
     @Override
     public String toString() {
         return "PaymentUnit{" +
-                "workerId=" + workerId +
-                ", unitName='" + unitName + '\'' +
+                "workerName='" + workerName + '\'' +
+                ", unitId=" + unitId +
                 ", unitPrice=" + unitPrice +
                 ", numOfUnitCompleted=" + numOfUnitCompleted +
                 '}';

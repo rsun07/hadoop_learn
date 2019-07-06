@@ -7,10 +7,10 @@ import org.apache.hadoop.mapreduce.Mapper;
 
 import java.io.IOException;
 
-public class PaymentCountMapper extends Mapper<LongWritable, Text, IntWritable, PaymentUnit> {
+public class PaymentCountMapper extends Mapper<LongWritable, Text, Text, PaymentUnit> {
 
-    IntWritable k = new IntWritable();
-    PaymentUnit v = new PaymentUnit();
+    Text k = new Text();
+    PaymentUnit.PaymentUnitBuilder vBuilder = new PaymentUnit.PaymentUnitBuilder();
 
     @Override
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
@@ -18,20 +18,20 @@ public class PaymentCountMapper extends Mapper<LongWritable, Text, IntWritable, 
 
         String[] fields = line.split(" ");
 
-        int workId = Integer.parseInt(fields[0]);
+        String workName = fields[0];
 
-        String unitName = fields[1];
+        int unitId = Integer.parseInt(fields[1]);
 
         double unitPrice = Double.parseDouble(fields[2]);
 
         int numOfUnit = Integer.parseInt(fields[3]);
 
-        k.set(workId);
-        v.setWorkerId(workId);
-        v.setUnitName(unitName);
-        v.setNumOfUnitCompleted(numOfUnit);
-        v.setUnitPrice(unitPrice);
+        k.set(workName);
+        vBuilder.workerName(workName)
+                .unitId(unitId)
+                .unitPrice(unitPrice)
+                .numOfUnitCompleted(numOfUnit);
 
-        context.write(k, v);
+        context.write(k, vBuilder.build());
     }
 }
