@@ -10,7 +10,7 @@ import java.io.IOException;
 public class PaymentCountMapper extends Mapper<LongWritable, Text, IntWritable, PaymentUnit> {
 
     IntWritable k = new IntWritable();
-    PaymentUnit.PaymentUnitBuilder vBuilder = new PaymentUnit.PaymentUnitBuilder();
+    PaymentUnit v = new PaymentUnit();
 
     @Override
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
@@ -18,7 +18,7 @@ public class PaymentCountMapper extends Mapper<LongWritable, Text, IntWritable, 
 
         String[] fields = line.split(" ");
 
-        int workId = Integer.getInteger(fields[0]);
+        int workId = Integer.parseInt(fields[0]);
 
         String unitName = fields[1];
 
@@ -27,11 +27,11 @@ public class PaymentCountMapper extends Mapper<LongWritable, Text, IntWritable, 
         int numOfUnit = Integer.parseInt(fields[3]);
 
         k.set(workId);
-        vBuilder.workerId(workId)
-                .unitName(unitName)
-                .unitPrice(unitPrice)
-                .numOfUnitCompleted(numOfUnit);
+        v.setWorkerId(workId);
+        v.setUnitName(unitName);
+        v.setNumOfUnitCompleted(numOfUnit);
+        v.setUnitPrice(unitPrice);
 
-        context.write(k, vBuilder.build());
+        context.write(k, v);
     }
 }

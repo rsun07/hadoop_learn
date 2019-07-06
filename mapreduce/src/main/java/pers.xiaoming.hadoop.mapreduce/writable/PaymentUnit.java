@@ -1,7 +1,6 @@
 package pers.xiaoming.hadoop.mapreduce.writable;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.hadoop.io.Writable;
@@ -15,7 +14,6 @@ import java.io.IOException;
  * and the price per unit
  */
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class PaymentUnit implements Writable {
