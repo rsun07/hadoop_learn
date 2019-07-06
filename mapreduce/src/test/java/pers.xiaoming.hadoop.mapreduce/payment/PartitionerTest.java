@@ -18,8 +18,22 @@ public class PartitionerTest extends TestBase {
     }
 
     @Test
-    public void test5kInput() throws IOException, ClassNotFoundException, InterruptedException {
-        PaymentCountDriver driver = new PaymentCountDriver(FIVE_K_INPUT_PATH, FIVE_K_OUTPUT_PATH);
+    public void testOnePartition() throws IOException, ClassNotFoundException, InterruptedException {
+        PaymentPartitionCountDriver driver = new PaymentPartitionCountDriver(FIVE_K_INPUT_PATH, FIVE_K_OUTPUT_PATH);
+        Assert.assertTrue(driver.run());
+    }
+
+    @Test
+    public void testThreePartition() throws IOException, ClassNotFoundException, InterruptedException {
+        // partition number is bigger than 1 and lesser than num of partition
+        // exception will throw
+        PaymentPartitionCountDriver driver = new PaymentPartitionCountDriver(FIVE_K_INPUT_PATH, FIVE_K_OUTPUT_PATH, 3);
+        Assert.assertFalse(driver.run());
+    }
+
+    @Test
+    public void testFivePartition() throws IOException, ClassNotFoundException, InterruptedException {
+        PaymentPartitionCountDriver driver = new PaymentPartitionCountDriver(FIVE_K_INPUT_PATH, FIVE_K_OUTPUT_PATH, 5);
         Assert.assertTrue(driver.run());
     }
 }

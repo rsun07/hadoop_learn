@@ -1,2 +1,0 @@
-PaymentResult(workerName=Worker1, workshopId=100, completedUnits={1=2.0, 2=1.0}, totalPayment=20.0)
-PaymentResult(workerName=Worker2, workshopId=101, completedUnits={1=2.0}, totalPayment=40.0)

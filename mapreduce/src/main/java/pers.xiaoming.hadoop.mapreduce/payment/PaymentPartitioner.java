@@ -12,6 +12,6 @@ public class PaymentPartitioner extends Partitioner<Text, PaymentUnit> {
     public int getPartition(Text text, PaymentUnit paymentUnit, int i) {
         String[] fileds = text.toString().split(",");
         int workshopId = Integer.valueOf(fileds[1]);
-        return workshopId;
+        return workshopId - 1;
     }
 }

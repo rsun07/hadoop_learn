@@ -12,18 +12,22 @@ import pers.xiaoming.hadoop.mapreduce.payment.models.PaymentUnit;
 import java.io.IOException;
 
 public class PaymentPartitionCountDriver {
+    private static final int DEFAULT_NUM_PARTITION = 1;
     private final String inputPath;
     private final String outputPath;
     private final Job job;
 
     public PaymentPartitionCountDriver(String inputPath, String outputPath) throws IOException {
-        this.inputPath = inputPath;
-        this.outputPath = outputPath;
-
-        this.job = setupJob();
+        this(inputPath, outputPath, DEFAULT_NUM_PARTITION);
     }
 
-    private Job setupJob() throws IOException {
+    public PaymentPartitionCountDriver(String inputPath, String outputPath, int numPartition) throws IOException {
+        this.inputPath = inputPath;
+        this.outputPath = outputPath;
+        this.job = setupJob(numPartition);
+    }
+
+    private Job setupJob(int numPartition) throws IOException {
         Configuration configuration = new Configuration();
         Job job = Job.getInstance(configuration);
 
@@ -45,7 +49,7 @@ public class PaymentPartitionCountDriver {
         // if numReduceTasks > numPartition, result to some empty output file
         // if 1 < numReduceTasks < numPartition, some partition data has no reducerTask to handle, Exception throw
         // numReduceTask == 1, the only one reduce task will handle all partitions and write the result into one single output file
-        job.setNumReduceTasks(1);
+        job.setNumReduceTasks(numPartition);
 
         FileInputFormat.setInputPaths(job, new Path(inputPath));
         FileOutputFormat.setOutputPath(job, new Path(outputPath));
