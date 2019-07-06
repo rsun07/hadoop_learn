@@ -1,7 +1,6 @@
 package pers.xiaoming.hadoop.mapreduce.payment.models;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import org.apache.hadoop.io.MapWritable;
 import org.apache.hadoop.io.Writable;
@@ -11,7 +10,6 @@ import java.io.DataOutput;
 import java.io.IOException;
 
 @Data
-@Builder
 @AllArgsConstructor
 public class PaymentResult implements Writable {
     private String workerName;

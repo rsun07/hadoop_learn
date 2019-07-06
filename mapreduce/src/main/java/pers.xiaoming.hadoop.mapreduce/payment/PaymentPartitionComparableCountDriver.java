@@ -2,6 +2,7 @@ package pers.xiaoming.hadoop.mapreduce.payment;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
@@ -40,8 +41,8 @@ public class PaymentPartitionComparableCountDriver {
         job.setMapOutputKeyClass(Text.class);
         job.setMapOutputValueClass(PaymentUnit.class);
 
-        job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(PaymentResultComparable.class);
+        job.setOutputKeyClass(PaymentResultComparable.class);
+        job.setOutputValueClass(NullWritable.class);
 
         // set partitioner class
         job.setPartitionerClass(PaymentPartitioner.class);

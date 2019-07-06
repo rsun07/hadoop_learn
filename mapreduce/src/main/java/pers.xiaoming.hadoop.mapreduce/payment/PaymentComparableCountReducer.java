@@ -6,7 +6,6 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
-import pers.xiaoming.hadoop.mapreduce.payment.models.PaymentResult;
 import pers.xiaoming.hadoop.mapreduce.payment.models.PaymentResultComparable;
 import pers.xiaoming.hadoop.mapreduce.payment.models.PaymentUnit;
 
