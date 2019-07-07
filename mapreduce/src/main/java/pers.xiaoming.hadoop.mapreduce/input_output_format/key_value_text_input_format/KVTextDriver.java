@@ -2,7 +2,6 @@ package pers.xiaoming.hadoop.mapreduce.input_output_format.key_value_text_input_
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
@@ -10,9 +9,6 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.KeyValueLineRecordReader;
 import org.apache.hadoop.mapreduce.lib.input.KeyValueTextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
-import pers.xiaoming.hadoop.mapreduce.helloworld.WordCountDriver;
-import pers.xiaoming.hadoop.mapreduce.helloworld.WordCountMapper;
-import pers.xiaoming.hadoop.mapreduce.helloworld.WordCountReducer;
 
 import java.io.IOException;
 

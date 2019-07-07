@@ -1,48 +1,42 @@
-package pers.xiaoming.hadoop.mapreduce.input_output_format.n_line_input_format;
+package pers.xiaoming.hadoop.mapreduce.bid.max;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.LongWritable;
-import org.apache.hadoop.io.Text;
+import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
-import org.apache.hadoop.mapreduce.lib.input.NLineInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import java.io.IOException;
 
-public class NLineTextDriver {
+public class BidTopTwoDriver {
     private final String inputPath;
     private final String outputPath;
     private final Job job;
 
-    public NLineTextDriver(String inputPath, String outputPath) throws IOException {
+    public BidTopTwoDriver(String inputPath, String outputPath) throws IOException {
         this.inputPath = inputPath;
         this.outputPath = outputPath;
-
         this.job = setupJob();
     }
 
     private Job setupJob() throws IOException {
         Configuration configuration = new Configuration();
-
         Job job = Job.getInstance(configuration);
 
-        job.setJarByClass(NLineTextDriver.class);
+        job.setJarByClass(BidTopTwoDriver.class);
 
-        job.setMapperClass(NLineTextMapper.class);
-        job.setReducerClass(NLineTextReducer.class);
+        job.setMapperClass(BidTopTwoMapper.class);
+        job.setReducerClass(BidTopTwoReducer.class);
 
-        job.setMapOutputKeyClass(Text.class);
-        job.setMapOutputValueClass(LongWritable.class);
+        // set reducer grouping comparator
+        job.setGroupingComparatorClass(BidGroupingComparator.class);
 
-        job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(LongWritable.class);
+        job.setMapOutputKeyClass(BidTopTwo.class);
+        job.setMapOutputValueClass(NullWritable.class);
 
-        // set input format class
-        // number of splits:3
-        NLineInputFormat.setNumLinesPerSplit(job, 3);
-        job.setInputFormatClass(NLineInputFormat.class);
+        job.setOutputKeyClass(BidTopTwo.class);
+        job.setOutputValueClass(NullWritable.class);
 
         FileInputFormat.setInputPaths(job, new Path(inputPath));
         FileOutputFormat.setOutputPath(job, new Path(outputPath));

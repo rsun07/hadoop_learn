@@ -1,4 +1,4 @@
-package pers.xiaoming.hadoop.mapreduce.bid.models;
+package pers.xiaoming.hadoop.mapreduce.bid.sort;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,12 +12,12 @@ import java.io.IOException;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Bid implements WritableComparable<Bid> {
+public class BidSortByPrice implements WritableComparable<BidSortByPrice> {
     private int targetId;
     private double price;
 
     @Override
-    public int compareTo(Bid that) {
+    public int compareTo(BidSortByPrice that) {
         double diff = this.price - that.getPrice();
 
         if (diff > 0) {

@@ -6,7 +6,6 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
-import pers.xiaoming.hadoop.mapreduce.bid.models.Bid;
 
 import java.io.IOException;
 
@@ -37,10 +36,10 @@ public class BidSortDriver {
         job.setPartitionerClass(BidSortPartitioner.class);
         job.setNumReduceTasks(numPartition);
 
-        job.setMapOutputKeyClass(Bid.class);
+        job.setMapOutputKeyClass(BidSortByPrice.class);
         job.setMapOutputValueClass(Text.class);
 
-        job.setOutputKeyClass(Bid.class);
+        job.setOutputKeyClass(BidSortByPrice.class);
         job.setOutputValueClass(Text.class);
 
         FileInputFormat.setInputPaths(job, new Path(inputPath));

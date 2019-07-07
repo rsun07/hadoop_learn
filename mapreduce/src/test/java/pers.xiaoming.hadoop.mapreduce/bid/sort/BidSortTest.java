@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import pers.xiaoming.hadoop.mapreduce.TestBase;
-import pers.xiaoming.hadoop.mapreduce.bid.sort.BidSortDriver;
 
 import java.io.IOException;
 
@@ -13,14 +12,14 @@ import java.io.IOException;
 public class BidSortTest extends TestBase {
     private static final String RESOURCES_PATH = ROOT_RESOURCE_PATH + "/bid";
     private static final String INPUT_PATH = RESOURCES_PATH + "/bid_input";
-    private static final String OUTPUT_PATH_PREFIX = RESOURCES_PATH + "/bid_sort_output_5k";
+    private static final String OUTPUT_PATH_PREFIX = RESOURCES_PATH + "/bid_sort_output";
     private static final String NUM_PARTITION_ONE_OUTPUT_PATH = OUTPUT_PATH_PREFIX + "_num_p_1";
-    private static final String NUM_PARTITION_FIVE_OUTPUT_PATH = OUTPUT_PATH_PREFIX + "_num_p_5";
+    private static final String NUM_PARTITION_THREE_OUTPUT_PATH = OUTPUT_PATH_PREFIX + "_num_p_3";
 
     @BeforeClass
     public static void cleanup() throws IOException {
         cleanupOutputDir(NUM_PARTITION_ONE_OUTPUT_PATH);
-        cleanupOutputDir(NUM_PARTITION_FIVE_OUTPUT_PATH);
+        cleanupOutputDir(NUM_PARTITION_THREE_OUTPUT_PATH);
     }
 
     @Test
@@ -30,8 +29,8 @@ public class BidSortTest extends TestBase {
     }
 
     @Test
-    public void testFivePartition() throws IOException, ClassNotFoundException, InterruptedException {
-        BidSortDriver driver = new BidSortDriver(INPUT_PATH, NUM_PARTITION_FIVE_OUTPUT_PATH, 3);
+    public void testThreePartition() throws IOException, ClassNotFoundException, InterruptedException {
+        BidSortDriver driver = new BidSortDriver(INPUT_PATH, NUM_PARTITION_THREE_OUTPUT_PATH, 3);
         Assert.assertTrue(driver.run());
     }
 }

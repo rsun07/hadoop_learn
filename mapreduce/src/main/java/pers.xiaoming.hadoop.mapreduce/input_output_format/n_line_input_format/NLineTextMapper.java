@@ -5,7 +5,6 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 public class NLineTextMapper extends Mapper<LongWritable, Text, Text, LongWritable> {
     LongWritable v = new LongWritable(1);

@@ -7,7 +7,6 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
-import pers.xiaoming.hadoop.mapreduce.payment.models.PaymentResult;
 import pers.xiaoming.hadoop.mapreduce.payment.models.PaymentResultComparable;
 import pers.xiaoming.hadoop.mapreduce.payment.models.PaymentUnit;
 
