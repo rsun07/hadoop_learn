@@ -21,11 +21,11 @@ public class Bid implements WritableComparable<Bid> {
         double diff = this.price - that.getPrice();
 
         if (diff > 0) {
-            return 1;
+            return -1;
         } else if (diff == 0) {
             return 0;
         } else {
-            return -1;
+            return 1;
         }
     }
 

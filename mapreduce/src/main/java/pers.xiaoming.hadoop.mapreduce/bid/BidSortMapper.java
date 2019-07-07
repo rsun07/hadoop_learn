@@ -8,22 +8,22 @@ import pers.xiaoming.hadoop.mapreduce.bid.models.Bid;
 
 import java.io.IOException;
 
-public class BidSortMapper extends Mapper<LongWritable, Text, Text, Bid> {
-    Text k = new Text();
-    Bid v;
+public class BidSortMapper extends Mapper<LongWritable, Text, Bid, Text> {
+    Text v = new Text();
+    Bid k;
 
     @Override
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
-        String[] fields = key.toString().split("\t");
+        String[] fields = value.toString().split("\t");
 
         String bidderName = fields[0];
-        k.set(bidderName);
+        v.set(bidderName);
 
-        v = new Bid();
-        v.setTargetId(Integer.parseInt(fields[1]));
+        k = new Bid();
+        k.setTargetId(Integer.parseInt(fields[1]));
 
         double price = Precision.round(Double.parseDouble(fields[2]), 2);
-        v.setPrice(price);
+        k.setPrice(price);
 
         context.write(k, v);
     }

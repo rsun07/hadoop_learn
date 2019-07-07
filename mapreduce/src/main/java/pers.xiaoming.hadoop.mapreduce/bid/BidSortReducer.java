@@ -6,11 +6,11 @@ import pers.xiaoming.hadoop.mapreduce.bid.models.Bid;
 
 import java.io.IOException;
 
-public class BidSortReducer extends Reducer<Text, Bid, Text, Bid> {
+public class BidSortReducer extends Reducer<Bid, Text, Bid, Text> {
     @Override
-    protected void reduce(Text key, Iterable<Bid> values, Context context) throws IOException, InterruptedException {
-        for (Bid bid : values) {
-            context.write(key, bid);
+    protected void reduce(Bid key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
+        for (Text value : values) {
+            context.write(key, value);
         }
     }
 }

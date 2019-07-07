@@ -37,11 +37,11 @@ public class BidSortDriver {
         job.setPartitionerClass(BidSortPartitioner.class);
         job.setNumReduceTasks(numPartition);
 
-        job.setMapOutputKeyClass(Text.class);
-        job.setMapOutputValueClass(Bid.class);
+        job.setMapOutputKeyClass(Bid.class);
+        job.setMapOutputValueClass(Text.class);
 
-        job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(Bid.class);
+        job.setOutputKeyClass(Bid.class);
+        job.setOutputValueClass(Text.class);
 
         FileInputFormat.setInputPaths(job, new Path(inputPath));
         FileOutputFormat.setOutputPath(job, new Path(outputPath));
