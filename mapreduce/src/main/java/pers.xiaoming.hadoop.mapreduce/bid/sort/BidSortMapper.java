@@ -1,4 +1,4 @@
-package pers.xiaoming.hadoop.mapreduce.bid;
+package pers.xiaoming.hadoop.mapreduce.bid.sort;
 
 import org.apache.commons.math3.util.Precision;
 import org.apache.hadoop.io.LongWritable;

@@ -1,4 +1,4 @@
-package pers.xiaoming.hadoop.mapreduce.bid;
+package pers.xiaoming.hadoop.mapreduce.bid.sort;
 
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Partitioner;

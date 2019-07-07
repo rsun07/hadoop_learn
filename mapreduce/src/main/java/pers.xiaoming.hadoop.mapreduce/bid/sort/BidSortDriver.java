@@ -1,4 +1,4 @@
-package pers.xiaoming.hadoop.mapreduce.bid;
+package pers.xiaoming.hadoop.mapreduce.bid.sort;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
